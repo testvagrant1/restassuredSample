@@ -48,9 +48,18 @@ public class StepDefinitions {
         this.baseurl = url;
         this.symbols = symbols;
 	}
+	
+	@Given("Date is {string}")
+	public void date_is(String date){
+	this.date = date;
+	}
 
     @When("Make a query of exchange rate")
     public void make_query_for_exchange() {
+	if(!this.date.equals(""))
+	    this.baseurl = this.baseurl + "/" + this.date;
+	else
+	    this.baseurl = this.baseurl + "/latest";
         if( !this.base.equals("") && this.symbols.equals(""))
             this.baseurl = this.baseurl + "?base=" + this.base;
         if(!this.symbols.equals("") && this.base.equals(""))
