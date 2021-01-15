@@ -15,3 +15,8 @@ Feature: Exchange rate
     Given Exchange Rate API "https://api.ratesapi.io/api" and Symbols "JPY,TRY"
     When Make a query of exchange rate
     Then Response have symbols "JPY,TRY"
+
+  Scenario: Make queries of exchange with incorrect information
+    Given Exchange Rate API "https://api.ratesapi.io/api" and Symbols "JPY,TY"
+    When Make a query of exchange rate
+    Then Response must have invalid

@@ -28,6 +28,10 @@ class client {
     static void call(String url) {
         given().when().get(url).then().statusCode(200);
     }
+
+    static void invalid_call(String url){
+        given().when().get(url).then().statusCode(400).body("error", containsString("invalid"));
+    }
 }
 
 public class StepDefinitions {
@@ -106,5 +110,10 @@ public class StepDefinitions {
     public void has_response_symbols(String symbols){
 	    List<String> _symbol = Arrays.asList(symbols.split(","));
         client.call(this.baseurl, "rates", _symbol);
+    }
+
+    @Then("Response must have invalid")
+    public void has_invalid_response(){
+	    client.invalid_call(this.baseurl);
     }
 }
