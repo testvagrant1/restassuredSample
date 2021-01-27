@@ -20,3 +20,9 @@ Feature: Exchange rate
     Given Exchange Rate API "https://api.ratesapi.io/api" and Symbols "JPY,TY"
     When Make a query of exchange rate
     Then Response must have invalid
+
+  Scenario: Make queries of exchange in specific date
+    Given Exchange Rate API "https://api.ratesapi.io/api" and Symbols "JPY,TRY"
+    Given Date is "2021-01-26"
+    When Make a query of exchange rate
+    Then Response have symbols "JPY,TRY"
